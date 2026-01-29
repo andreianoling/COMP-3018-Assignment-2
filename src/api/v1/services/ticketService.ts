@@ -1,4 +1,13 @@
-const ticketArray = [
+export interface Ticket {
+    id: number;
+    title: string;
+    description: string;
+    priority: string;
+    status: string;
+    createdAt: string;
+}
+
+export const ticketArray: Ticket[] = [
     {id: 1, title: "Update footer copyright year", description: "Footer still shows 2024", priority: "low", status: "open", createdAt:"2025-01-12T10:00:00.000Z"},
     {id: 2, title: "Profile picture upload slow", description: "Upload takes 30+ seconds", priority: "medium", status: "open", createdAt:"2025-01-13T10:00:00.000Z"},
     {id: 3, title: "Dashboard loading slowly", description: "Dashboard takes 10+ seconds to load", priority: "medium", status: "open", createdAt:"2025-01-09T10:00:00.000Z"},
@@ -7,3 +16,7 @@ const ticketArray = [
     {id: 6, title: "Login page not loading", description: "Users report blank screen on login", priority: "critical", status: "open", createdAt:"2025-01-09T10:00:00.000Z"},
     {id: 7, title: "Dark mode toggle broken", description: "Dark mode doesn't persist after refresh", priority: "medium", status: "resolved", createdAt:"2025-01-05T10:00:00.000Z"}
 ]; 
+
+export const getAllTickets = (): Ticket[] => {
+    return ticketArray;
+}
