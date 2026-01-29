@@ -28,3 +28,10 @@ export const getAllTickets = (): Ticket[] => {
 export const getTicketById = (id: number): Ticket | undefined => {
     return ticketArray.find(ticket => ticket.id === id);
 }
+
+export const deleteTicket = (id: number): void => {
+    const index = ticketArray.findIndex(ticket => ticket.id === id);
+    if (index !== -1) {
+        ticketArray.splice(index, 1);
+    }
+}
