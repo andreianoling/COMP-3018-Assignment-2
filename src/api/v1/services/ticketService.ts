@@ -17,6 +17,10 @@ export const ticketArray: Ticket[] = [
     {id: 7, title: "Dark mode toggle broken", description: "Dark mode doesn't persist after refresh", priority: "medium", status: "resolved", createdAt:"2025-01-05T10:00:00.000Z"}
 ]; 
 
+export const createTicket = (ticket: Ticket): void => {
+    ticketArray.push(ticket);
+}
+
 export const getAllTickets = (): Ticket[] => {
     return ticketArray;
 }
