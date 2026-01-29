@@ -4,9 +4,45 @@ import { HTTP_STATUS } from "../../../../src/constants/httpConstants";
 import { Ticket } from "../services/ticketService";
 
 export const createTicket = async (req: Request, res: Response): Promise<void> => {
-    const newTicket: Ticket = req.body;
+    const { id, title, description, priority } = req.body;
+
+    if (id === undefined || id === null) {
+        res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Missing required field: id" });
+        return;
+    }
+    if (typeof id !== "number" || isNaN(id)) {
+        res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Field 'id' must be a valid number" });
+        return;
+    }
+    if (ticketService.getTicketById(id)) {
+        res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "A ticket with this id already exists" });
+        return;
+    }
+    if (!title) {
+        res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Missing required field: title" });
+        return;
+    }
+    if (!description) {
+        res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Missing required field: description" });
+        return;
+    }
+    const validPriorities = ["critical", "high", "medium", "low"];
+    if (!priority || !validPriorities.includes(priority)) {
+        res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Invalid priority. Must be one of: critical, high, medium, low" });
+        return;
+    }
+
+    const newTicket: Ticket = {
+        id,
+        title,
+        description,
+        priority,
+        status: "open",
+        createdAt: new Date().toISOString()
+    };
+
     await ticketService.createTicket(newTicket);
-    res.status(HTTP_STATUS.CREATED).json({message: "Ticket created successfully", data: newTicket});
+    res.status(HTTP_STATUS.CREATED).json({ message: "Ticket created successfully", data: newTicket });
 }
 
 export const getAllTickets = async (req: Request, res: Response): Promise<void> => {
