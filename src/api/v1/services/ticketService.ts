@@ -20,3 +20,7 @@ export const ticketArray: Ticket[] = [
 export const getAllTickets = (): Ticket[] => {
     return ticketArray;
 }
+
+export const getTicketById = (id: number): Ticket | undefined => {
+    return ticketArray.find(ticket => ticket.id === id);
+}
