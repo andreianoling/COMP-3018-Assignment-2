@@ -23,3 +23,9 @@ export const getTicketById = async (req: Request, res: Response): Promise<void> 
         res.status(HTTP_STATUS.NOT_FOUND).json({message: "Ticket not found"});
     }
 }
+
+export const deleteTicket = (req: Request, res: Response): void => {
+    const {id} = req.params;
+    ticketService.deleteTicket(id);
+    res.status(HTTP_STATUS.OK).json({message: `Ticket with id ${id} deleted successfully`});
+}
