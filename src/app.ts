@@ -1,5 +1,5 @@
 import express, { Express } from "express";
-import ticketRoutes from "./api/v1/routes/ticketRoutes.ts";
+import ticketRoutes from "./api/v1/routes/ticketRoutes";
 
 const app: Express = express();
 
