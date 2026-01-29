@@ -25,6 +25,13 @@ export const getTicketById = async (req: Request, res: Response): Promise<void> 
     }
 }
 
+export const updateTicket = async (req: Request, res: Response): Promise<void> => {
+    const id = Number(req.params.id);
+    const updatedTicket: Ticket = req.body;
+    ticketService.updateTicket(id, updatedTicket);
+    res.status(HTTP_STATUS.OK).json({message: `Ticket with id ${id} updated successfully`, data: updatedTicket});
+}
+
 export const deleteTicket = async (req: Request, res: Response): Promise<void> => {
     const id = Number(req.params.id);
     await ticketService.deleteTicket(id);
