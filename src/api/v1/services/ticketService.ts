@@ -72,6 +72,7 @@ export const calculateUrgency = (id: number): TicketWithUrgency | undefined => {
     // Calculate ticket age in days
     const currentDate = new Date();
     const createdDate = new Date(ticket.createdAt);
+    // Current date (in milliseconds) - created date (in milliseconds) divided by milliseconds in a day, rounded down with Math.floor
     const ticketAge = Math.floor((currentDate.getTime() - createdDate.getTime()) / (1000 * 60 * 60 * 24));
 
     // Determine base urgency value
