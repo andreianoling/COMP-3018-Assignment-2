@@ -81,15 +81,20 @@ export const calculateUrgency = (id: number): TicketWithUrgency | undefined => {
     } else if (ticket.priority === "high") {
         baseUrgency = 30;
     } else if (ticket.priority === "medium") {
-        baseUrgency = 30;
+        baseUrgency = 20;
     } else if (ticket.priority === "low") {
         baseUrgency = 10;
     } else {
         baseUrgency = NaN; // Invalid priority, however should not happen
     }
 
-    // Calculate urgency score
-    const urgencyScore = baseUrgency + (ticketAge * 5);
+    // Calculate urgency score - if resolved, score is 0
+    let urgencyScore: number;
+    if (ticket.status === "resolved") {
+        urgencyScore = 0;
+    } else {
+        urgencyScore = baseUrgency + (ticketAge * 5);
+    }
 
     // Determine urgency level
     let urgencyLevel: string;
