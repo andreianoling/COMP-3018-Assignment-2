@@ -25,6 +25,9 @@ describe("Urgency Calculation Function", () => {
         
         const res: Response = await request(app).get("/api/v1/tickets/35/urgency");
         expect(res.status).toBe(200);
+        expect(res.body.data.urgencyLevel).toBe("Critical. Immediate attention required.");
+        
+        await request(app).delete("/api/v1/tickets/35");
     });
 
     it ("should calculate urgency score and age correctly", async () => {
