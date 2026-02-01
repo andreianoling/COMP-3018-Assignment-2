@@ -1,5 +1,5 @@
 import express, {Router} from "express";
-import {createTicket, getAllTickets, getTicketById, updateTicket, deleteTicket} from "../controllers/ticketController";
+import {createTicket, getAllTickets, getTicketById, updateTicket, deleteTicket, calculateUrgency} from "../controllers/ticketController";
 
 const router: Router = express.Router();
 
@@ -12,5 +12,7 @@ router.get("/:id", getTicketById);
 router.put("/:id", updateTicket);
 
 router.delete("/:id", deleteTicket);
+
+router.get("/:id/urgency", calculateUrgency);
 
 export default router;

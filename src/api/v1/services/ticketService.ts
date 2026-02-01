@@ -42,3 +42,4 @@ export const deleteTicket = (id: number): void => {
         ticketArray.splice(index, 1);
     }
 }
+
