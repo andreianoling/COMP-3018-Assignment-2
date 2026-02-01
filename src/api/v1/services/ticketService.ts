@@ -18,7 +18,7 @@ export interface TicketWithUrgency extends Ticket {
 export const ticketArray: Ticket[] = [
     {id: 1, title: "Update footer copyright year", description: "Footer still shows 2024", priority: "low", status: "open", createdAt:"2026-01-29T10:00:00.000Z"},
     {id: 2, title: "Profile picture upload slow", description: "Upload takes 30+ seconds", priority: "medium", status: "open", createdAt:"2026-01-29T10:00:00.000Z"},
-    {id: 3, title: "Dashboard loading slowly", description: "Dashboard takes 10+ seconds to load", priority: "medium", status: "open", createdAt:"2026-01-26T10:00:00.000Z"},
+    {id: 3, title: "Dashboard loading slowly", description: "Dashboard takes 10+ seconds to load", priority: "high", status: "open", createdAt:"2026-01-27T10:00:00.000Z"},
     {id: 4, title: "Password reset email delayed", description: "Reset emails taking over 30 minutes", priority: "high", status: "open", createdAt:"2026-01-22T10:00:00.000Z"},
     {id: 5, title: "Export to PDF not working", description: "PDF export fails silently", priority: "high", status: "open", createdAt:"2026-01-23T10:00:00.000Z"},
     {id: 6, title: "Login page not loading", description: "Users report blank screen on login", priority: "critical", status: "open", createdAt:"2026-01-25T10:00:00.000Z"},
@@ -102,7 +102,7 @@ export const calculateUrgency = (id: number): TicketWithUrgency | undefined => {
         urgencyLevel = "Minimal. Ticket resolved.";
     } else if (urgencyScore >= 80) {
         urgencyLevel = "Critical. Immediate attention required.";
-    } else if (urgencyScore >= 55) {
+    } else if (urgencyScore >= 50) {
         urgencyLevel = "High Urgency. Prioritize resolution.";
     } else if (urgencyScore >= 30) {
         urgencyLevel = "Moderate. Suitable for attention.";
