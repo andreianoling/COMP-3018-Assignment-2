@@ -76,6 +76,11 @@ export const deleteTicket = async (req: Request, res: Response): Promise<void> =
 
 export const calculateUrgency = async (req: Request, res: Response): Promise<void> => {
     const id = Number(req.params.id);
-    await ticketService.calculateUrgency(id);
-    res.status(HTTP_STATUS.OK).json({message: `Ticket urgency calculated`, data: ticketService.calculateUrgency(id) });
+    const ticketWithUrgency = ticketService.calculateUrgency(id);
+    
+    if (ticketWithUrgency) {
+        res.status(HTTP_STATUS.OK).json({message: `Ticket urgency calculated`, data: ticketWithUrgency });
+    } else {
+        res.status(HTTP_STATUS.NOT_FOUND).json({message: "Ticket not found"});
+    }
 }    
