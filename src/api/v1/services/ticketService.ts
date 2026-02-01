@@ -100,16 +100,14 @@ export const calculateUrgency = (id: number): TicketWithUrgency | undefined => {
     let urgencyLevel: string;
     if (ticket.status === "resolved") {
         urgencyLevel = "Minimal. Ticket resolved.";
-    } else if (ticket.priority === "critical") {
+    } else if (urgencyScore >= 80) {
         urgencyLevel = "Critical. Immediate attention required.";
-    } else if (ticket.priority === "high") {
+    } else if (urgencyScore >= 55) {
         urgencyLevel = "High Urgency. Prioritize resolution.";
-    } else if (ticket.priority === "medium") {
+    } else if (urgencyScore >= 30) {
         urgencyLevel = "Moderate. Suitable for attention.";
-    } else if (ticket.priority === "low") {
-        urgencyLevel = "Low urgency. Address when capacity allows.";
     } else {
-        urgencyLevel = "Unknown priority level.";
+        urgencyLevel = "Low urgency. Address when capacity allows.";
     }
 
     return {
