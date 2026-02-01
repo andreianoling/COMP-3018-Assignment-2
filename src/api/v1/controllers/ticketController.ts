@@ -73,3 +73,9 @@ export const deleteTicket = async (req: Request, res: Response): Promise<void> =
     await ticketService.deleteTicket(id);
     res.status(HTTP_STATUS.OK).json({message: `Ticket with id ${id} deleted successfully`});
 }
+
+export const calculateUrgency = async (req: Request, res: Response): Promise<void> => {
+    const id = Number(req.params.id);
+    await ticketService.calculateUrgency(id);
+    res.status(HTTP_STATUS.OK).json({message: `Ticket urgency calculated`, data: ticketService.calculateUrgency(id) });
+}    
