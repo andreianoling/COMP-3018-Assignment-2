@@ -14,4 +14,25 @@ describe("Urgency Calculation Function", () => {
         expect(res.body.data).toHaveProperty("urgencyLevel", "Low urgency. Address when capacity allows.");
     });
 
+    it ("should calculate urgency score correctly", async () => {
+        const tenDayOldTestDate = new Date();
+        tenDayOldTestDate.setDate(tenDayOldTestDate.getDate() - 10);
+        
+        const testTicket = {
+            id: 25,
+            title: "Test score",
+            description: "Test score",
+            priority: "low",
+            status: "open",
+            createdAt: tenDayOldTestDate.toISOString()
+        };
+        
+        await request(app).post("/api/v1/tickets").send(testTicket);
+        
+        const res: Response = await request(app).get("/api/v1/tickets/25/urgency");
+        expect(res.status).toBe(200);
+        expect(res.body.data.urgencyScore).toBe(60);
+        
+        await request(app).delete("/api/v1/tickets/25");
+    });
 });

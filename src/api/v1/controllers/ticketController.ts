@@ -4,7 +4,7 @@ import { HTTP_STATUS } from "../../../../src/constants/httpConstants";
 import { Ticket } from "../services/ticketService";
 
 export const createTicket = async (req: Request, res: Response): Promise<void> => {
-    const { id, title, description, priority } = req.body;
+    const { id, title, description, priority, createdAt } = req.body;
 
     // if id is missing or not a number
     if (id === undefined || id === null) {
@@ -46,7 +46,7 @@ export const createTicket = async (req: Request, res: Response): Promise<void> =
         description,
         priority,
         status: "open",
-        createdAt: new Date().toISOString()
+        createdAt: createdAt || new Date().toISOString()
     };
 
     await ticketService.createTicket(newTicket);
