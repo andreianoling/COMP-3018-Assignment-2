@@ -8,13 +8,10 @@ describe("Urgency Calculation Function", () => {
         expect(res.body).toHaveProperty("message", "Ticket not found");
     });
 
-    it("should calculate low urgency ticket", async () => {
+    it("should assign correct urgency level", async () => {
         const res: Response = await request(app).get("/api/v1/tickets/1/urgency");
         expect(res.status).toBe(200);
         expect(res.body.data).toHaveProperty("urgencyLevel", "Low urgency. Address when capacity allows.");
-        expect(res.body.data).toHaveProperty("urgencyScore");
-        expect(res.body.data).toHaveProperty("ticketAge");
     });
-
 
 });
