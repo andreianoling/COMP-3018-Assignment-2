@@ -28,7 +28,31 @@ describe("Ticket Routes Endpoints", () => {
         expect(res.body).toHaveProperty("message", "Ticket retrieved successfully");
     });
 
-    
+    it ("should update a ticket with updateTicket", async () => {
+        const updatedTicket = {
+            id: 1,
+            title: "updated test",
+            description: "updated description",
+            priority: "medium",
+            status: "open",
+            createdAt: new Date().toISOString()
+        };
+        const res: Response = await request(app).put("/api/v1/tickets/1").send(updatedTicket);
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty("message", "Ticket with id 1 updated successfully");
+    });
+
+    it ("should delete a ticket with deleteTicket", async () => {
+        const res: Response = await request(app).delete("/api/v1/tickets/1");
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty("message", "Ticket with id 1 deleted successfully");
+    });
+
+    it ("should calculate urgency for a ticket with calculateUrgency", async () => {
+        const res: Response = await request(app).get("/api/v1/tickets/2/urgency");
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty("message", "Ticket urgency calculated");
+    });
 });
 
 
